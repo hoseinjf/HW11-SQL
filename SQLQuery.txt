@@ -1,0 +1,67 @@
+-- 1 ---------------------------------------------------------
+SELECT P.Name,P.Price FROM Products AS P WHERE P.Price>500
+
+-- 2 ---------------------------------------------------------
+SELECT YEAR((O.OrderDate)) AS DATAS,SUM(O.TotalAmount)AS TOTAL
+FROM Orders O
+GROUP BY YEAR((O.OrderDate))
+
+-- 3 ---------------------------------------------------------
+SELECT sum(Products.Price),Categories.Name
+FROM Products
+full JOIN Categories  ON  Products.CategoryId = Categories.Id
+GROUP BY Categories.Name
+
+-- 4 ---------------------------------------------------------
+SELECT P.Name,P.Price FROM Products P
+ORDER BY P.Price DESC
+
+-- 5 ---------------------------------------------------------
+SELECT O.CustomerId,COUNT(O.ProductId) as SumProduct FROM Orders O
+GROUP BY O.CustomerId
+
+-- 6 ---------------------------------------------------------
+SELECT P.CategoryId,AVG(P.Price) as [AVG] FROM Products P
+GROUP BY P.CategoryId
+
+-- 7 ---------------------------------------------------------
+SELECT P.Name AS P_NAME,C.Name AS C_NAME 
+FROM Products P,Categories C
+ORDER BY P.Name,C.Name
+
+-- 8 ---------------------------------------------------------
+select Products.CategoryId,sum(Orders.TotalAmount) from Orders
+join Products on Orders.ProductId= Products.Id
+where year(Orders.OrderDate)=2023
+group by Products.CategoryId
+
+-- 9 ---------------------------------------------------------
+select MONTH(Orders.OrderDate)as datey,count(*) from Orders
+--where MONTH(Orders.OrderDate)=datey
+group by MONTH(Orders.OrderDate)
+
+-- 10 ---------------------------------------------------------
+SELECT O.CustomerId,SUM(O.TotalAmount) FROM Orders O
+GROUP BY O.CustomerId
+
+-- 11 ---------------------------------------------------------
+--SELECT c.Name FROM Categories c
+--join Orders o on o.CustomerId = c.Id
+--join Categories c on p.CategoryId=c.Id
+--GROUP BY O.Id
+
+-- 12 ---------------------------------------------------------
+SELECT C.Name,COUNT(O.ProductId)
+FROM Customers C,Orders O
+GROUP BY C.Name
+ORDER BY COUNT(O.ProductId)
+
+-- 13 ---------------------------------------------------------
+SELECT YEAR((O.OrderDate)) AS DATAS,COUNT(O.ProductId)AS Product
+FROM Orders O
+GROUP BY YEAR((O.OrderDate))
+
+-- 14 ---------------------------------------------------------
+select Products.Name,Orders.CustomerId from Orders
+join Products on Products.Id= Orders.ProductId
+group by Orders.CustomerId"# HW11-SQL" 
