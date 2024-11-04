@@ -45,11 +45,15 @@ SELECT O.CustomerId,SUM(O.TotalAmount) FROM Orders O
 GROUP BY O.CustomerId
 
 -- 11 ---------------------------------------------------------
---SELECT c.Name FROM Categories c
---join Orders o on o.CustomerId = c.Id
---join Categories c on p.CategoryId=c.Id
---GROUP BY O.Id
+SELECT c.Name,count(o.Id)as countOfCategory FROM Orders o
+join Products p on p.Id = o.ProductId
+join Categories c on p.CategoryId=c.Id
+GROUP BY c.Name
 
+--select * from Orders o
+--join Products p on p.Id = o.ProductId
+--join Categories c on p.CategoryId=c.Id
+--order by c.Id
 -- 12 ---------------------------------------------------------
 SELECT C.Name,COUNT(O.ProductId)
 FROM Customers C,Orders O
@@ -62,6 +66,7 @@ FROM Orders O
 GROUP BY YEAR((O.OrderDate))
 
 -- 14 ---------------------------------------------------------
-select Products.Name,Orders.CustomerId from Orders
+select Products.Name,count(Orders.CustomerId) from Orders
 join Products on Products.Id= Orders.ProductId
-group by Orders.CustomerId"# HW11-SQL" 
+group by Products.Name
+order by count(Orders.CustomerId) DESC 
